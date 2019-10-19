@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image for Gitpod
-      run: 
-        docker build -t soerensofke/diamonddust:gitpod .
+      run: |
+        docker build -t soerensofke/diamonddust:gitpod . 
         docker push soerensofke/diamonddust:gitpod
