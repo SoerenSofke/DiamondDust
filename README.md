@@ -5,7 +5,7 @@
 >-- <cite>Wikipedia contributors. (2019, September 18). [Diamond dust](https://en.wikipedia.org/w/index.php?title=Diamond_dust&oldid=916330765). In _Wikipedia, The Free Encyclopedia_. Retrieved 17:14, October 19, 2019.</cite>
 
 ### Build Status
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fsoerensofke%2FDiamondDust%2Fbadge%3Fref%3Dmaster&style=flat-square)](https://actions-badge.atrox.dev/soerensofke/DiamondDust/goto?ref=master)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fsoerensofke%2FDiamondDust%2Fbadge&style=flat-square)](https://actions-badge.atrox.dev/soerensofke/DiamondDust/goto)
 
 ### Contribute
 Please file any issues and feature requests [here](https://github.com/soerensofke/DiamondDust/issues) or directly start coding using the legendary Gitpod.
