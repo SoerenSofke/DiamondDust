@@ -1,5 +1,7 @@
 FROM gitpod/workspace-full
 
+USER root
+
 ### iverilog ###
 RUN yes | unminimize \
     && apt-get install -yq \
