@@ -9,3 +9,7 @@ image:
 # tasks:
 # - init: echo 'init script' # runs during prebuild
 #  command: echo 'start script'
+
+vscode:
+  extensions:
+    - mshr-h.veriloghdl@1.0.3:HvHGo74bvWYMl0HRkjezkg==
