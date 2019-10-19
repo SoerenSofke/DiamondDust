@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image riscv-gnu-toolchain-rv32i
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
-    - name: Build the Docker image for Gitpod
+    - name: Docker Image riscv-gnu-toolchain-rv32i
       run: |
         echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin        
         docker build -t soerensofke/diamonddust:riscvGnuToolchainRv32i ./.github/workflows/riscv-gnu-toolchain-rv32i
