@@ -63,7 +63,7 @@ ENV TOP /opt
 ENV RISCV $TOP/riscv32i
 ENV PATH $PATH:$RISCV/bin
 
-COPY --from=builder $RISCV/ $RISCV/
+#COPY --from=builder $RISCV/ $RISCV/
 
 ### Build elf2hex ###
-RUN wget --no-check-certificate https://github.com/sifive/elf2hex/releases/download/v1.0.2/elf2hex-1.0.2.tar.gz -O - | tar -xz
+#RUN wget --no-check-certificate https://github.com/sifive/elf2hex/releases/download/v1.0.2/elf2hex-1.0.2.tar.gz -O - | tar -xz
