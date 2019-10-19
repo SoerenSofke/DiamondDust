@@ -10,4 +10,4 @@
 ### Contribute
 Please file any issues and feature requests [here](https://github.com/soerensofke/DiamondDust/issues) or directly start coding using the legendary Gitpod.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/soerensofke/DiamondDust)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/soerensofke/DiamondDust)
