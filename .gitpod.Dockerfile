@@ -27,12 +27,12 @@ RUN yes | unminimize \
         patchutils \
         bc \
         zlib1g-dev \
-        libexpat-dev \        
+        libexpat-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-    
+
 ### Get sources and build ###
 RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
-RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make    
+RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make
 
 ### Test the RISC-V gnu toolchain ###
 RUN echo 'int main(void) { return 0; }' > hello.c \
@@ -64,3 +64,6 @@ ENV RISCV $TOP/riscv32i
 ENV PATH $PATH:$RISCV/bin
 
 COPY --from=builder $RISCV/ $RISCV/
+
+### Build elf2hex ###
+RUN wget --no-check-certificate https://github.com/sifive/elf2hex/releases/download/v1.0.2/elf2hex-1.0.2.tar.gz -O - | tar -xz
