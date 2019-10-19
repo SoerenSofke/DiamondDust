@@ -7,6 +7,7 @@ RUN yes | unminimize \
     && apt-get update \
     && apt-get install -yq \
         iverilog \
+        verilator \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 ### Download and extract icestrom toolchain ###
