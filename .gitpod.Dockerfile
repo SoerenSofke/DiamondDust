@@ -2,11 +2,12 @@ FROM gitpod/workspace-full AS builder
 
 USER root
 
-### specify work directory and RISC-V install directory ###
+### Specify work directory and RISC-V install directory ###
 ENV TOP /opt
 ENV RISCV $TOP/riscv32i
 ENV PATH $PATH:$RISCV/bin
 
+### Several standard packages are needed to build the toolchain ###
 RUN yes | unminimize \
     && apt-get update \
     && apt-get install -yq \
@@ -29,19 +30,20 @@ RUN yes | unminimize \
         libexpat-dev \        
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
     
-### get sources and build ###
+### Get sources and build ###
 RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
 RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make    
 
-### test the RISC-V gnu toolchain ###
+### Test the RISC-V gnu toolchain ###
 RUN echo 'int main(void) { return 0; }' > hello.c \
   && riscv32-unknown-elf-gcc -o hello hello.c
 
+### Here we build the final image to be used on gitpod ###
 FROM gitpod/workspace-full AS finalImage
 
 USER root
 
-### iverilog ###
+### Install HDL-tools ###
 RUN yes | unminimize \
     && apt-get update \
     && apt-get install -yq \
@@ -55,3 +57,10 @@ RUN wget --no-check-certificate https://github.com/FPGAwars/toolchain-icestorm/r
 
 ### Download and extract verilog-format ###
 RUN wget --no-check-certificate https://github.com/ericsonj/verilog-format/raw/master/bin/verilog-format-LINUX.zip -O tmp.zip && unzip tmp.zip -d /opt/verilog-format/ && rm tmp.zip
+
+### Install RISC-V tools from builder ###
+ENV TOP /opt
+ENV RISCV $TOP/riscv32i
+ENV PATH $PATH:$RISCV/bin
+
+COPY --from=builder $RISCV/ $RISCV/
