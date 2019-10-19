@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image Verilog
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
-    - name: Build the Docker image for Gitpod
+    - name: Docker Image Verilog
       run: |
         echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
         docker build -t soerensofke/diamonddust:verilog ./.github/workflows/verilog 
