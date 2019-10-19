@@ -17,3 +17,11 @@ RUN wget --no-check-certificate https://github.com/FPGAwars/toolchain-icestorm/r
 ### Download and extract verilog-format ###
 RUN wget --no-check-certificate https://github.com/ericsonj/verilog-format/raw/master/bin/verilog-format-LINUX.zip -O tmp.zip && unzip tmp.zip -d /opt/verilog-format/ && rm tmp.zip
 
+### specify work directory and RISC-V install directory ###
+ENV TOP /opt
+ENV RISCV $TOP/riscv32i
+ENV PATH $PATH:$RISCV/bin
+
+### get sources and build ###
+RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
+RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make
