@@ -23,5 +23,5 @@ ENV RISCV $TOP/riscv32i
 ENV PATH $PATH:$RISCV/bin
 
 ### get sources and build ###
-RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
+RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
 RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make
