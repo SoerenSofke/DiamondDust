@@ -40,29 +40,6 @@ RUN curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - \
     && ln -s /usr/bin/clangd-6.0 /usr/bin/clangd \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
-### PHP ###
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yq \
-        composer \
-        php \
-        php-all-dev \
-        php-ctype \
-        php-curl \
-        php-date \
-        php-gd \
-        php-gettext \
-        php-intl \
-        php-json \
-        php-mbstring \
-        php-mysql \
-        php-net-ftp \
-        php-pgsql \
-        php-sqlite3 \
-        php-tokenizer \
-        php-xml \
-        php-zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-# PHP language server is installed by theia-php-extension
-
 ### Yarn ###
 RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && apt-add-repository -yu "deb https://dl.yarnpkg.com/debian/ stable main" \
