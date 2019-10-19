@@ -1,5 +1,7 @@
 FROM gitpod/workspace-full AS builder
 
+USER root
+
 ### specify work directory and RISC-V install directory ###
 ENV TOP /opt
 ENV RISCV $TOP/riscv32i
