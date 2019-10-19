@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image for Gitpod
       run: |
-        docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin        
         docker build -t soerensofke/diamonddust:riscvGnuToolchainRv32i ./.github/workflows/riscv-gnu-toolchain-rv32i
         docker push soerensofke/diamonddust:riscvGnuToolchainRv32i        
       env:
