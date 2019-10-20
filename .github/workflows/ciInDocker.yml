@@ -4,13 +4,12 @@ on: [push]
 
 jobs:
   myjob:
-    runs-on: ubuntu-18.04 # linux required if you want to use docker
+    runs-on: ubuntu-18.04
     steps:
-    # Those steps are executed directly on the VM
-    - run: ls /
-    - run: echo $HOME
-    - name: Add a file
-      run: touch $HOME/stuff.txt
-    # Those steps are actions, which may run inside a container
     - uses: actions/checkout@v1
-    - uses: docker://continuumio/anaconda3:2019.07
+    - uses: docker://soerensofke/diamondust:verilog
+    - run: |
+        echo $HOME
+        ls $HOME
+        echo 'int main(void) { return 0; }' > hello.c && riscv32-unknown-elf-gcc -o hello hello.c
+        
