@@ -9,6 +9,6 @@ jobs:
       image: soerensofke/diamonddust:verilog
     steps:
     - uses: actions/checkout@v1
-    - run: echo $HOME
-    - run: ls $HOME
     - run: echo 'int main(void) { return 0; }' > hello.c && riscv32-unknown-elf-gcc -o hello hello.c
+    - run: ls
+      
