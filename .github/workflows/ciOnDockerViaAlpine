@@ -1,0 +1,12 @@
+name: CI in Docker via Alpine
+
+on: [push]
+
+jobs:
+  myjob:
+    runs-on: ubuntu-18.04    
+    container:
+      image: alpine:latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ls
