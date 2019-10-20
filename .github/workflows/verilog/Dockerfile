@@ -1,43 +1,3 @@
-#FROM gitpod/workspace-full AS builder
-
-#USER root
-
-### Specify work directory and RISC-V install directory ###
-#ENV TOP /opt
-#ENV RISCV $TOP/riscv32i
-#ENV PATH $PATH:$RISCV/bin
-
-### Several standard packages are needed to build the toolchain ###
-#RUN yes | unminimize \
-#    && apt-get update \
-#    && apt-get install -yq \
-#        autoconf \
-#        automake \
-#        autotools-dev \
-#        curl libmpc-dev \
-#        libmpfr-dev \
-#        libgmp-dev \
-#        gawk \
-#        build-essential \
-#        bison \
-#        flex \
-#        texinfo \
-#        gperf \
-#        libtool \
-#        patchutils \
-#        bc \
-#        zlib1g-dev \
-#        libexpat-dev \
-#    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-
-### Get sources and build ###
-#RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
-#RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make
-
-### Test the RISC-V gnu toolchain ###
-#RUN echo 'int main(void) { return 0; }' > hello.c \
-#  && riscv32-unknown-elf-gcc -o hello hello.c
-
 ### Here we build the final image to be used on gitpod ###
 FROM gitpod/workspace-full AS finalImage
 
@@ -63,7 +23,8 @@ ENV TOP /opt
 ENV RISCV $TOP/riscv32i
 ENV PATH $PATH:$RISCV/bin
 
-#COPY --from=builder $RISCV/ $RISCV/
+# Copy RISCV from builder image
+COPY --from=soerensofke/diamonddust:riscvGnuToolchainRv32i $RISCV/ $RISCV/
 
 ### Build elf2hex ###
 #RUN wget --no-check-certificate https://github.com/sifive/elf2hex/releases/download/v1.0.2/elf2hex-1.0.2.tar.gz -O - | tar -xz
