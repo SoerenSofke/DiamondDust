@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
-    - uses: docker://soerensofke/diamondust:verilog
+    - uses: docker://soerensofke/diamonddust:verilog
     - run: |
         echo $HOME
         ls $HOME
