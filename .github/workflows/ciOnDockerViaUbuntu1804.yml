@@ -1,4 +1,4 @@
-name: CI in Docker via Alpine
+name: CI in Docker via Ubuntu:18.04
 
 on: [push]
 
@@ -6,7 +6,7 @@ jobs:
   myjob:
     runs-on: ubuntu-18.04    
     container:
-      image: alpine:latest
+      image: ubuntu:18.04
     steps:
     - uses: actions/checkout@v1
     - run: ls
