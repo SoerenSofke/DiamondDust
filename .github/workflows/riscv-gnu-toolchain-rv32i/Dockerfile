@@ -1,13 +1,8 @@
-FROM gitpod/workspace-full AS builder
+FROM ubuntu:18.04 AS builder
 
 USER root
 
-### Specify work directory and RISC-V install directory ###
-ENV TOP /opt
-ENV RISCV $TOP/riscv32i
-ENV PATH $PATH:$RISCV/bin
-
-### Several standard packages are needed to build the toolchain ###
+### Several standard packages are needed to build the RISC-V toolchain ###
 RUN yes | unminimize \
     && apt-get update \
     && apt-get install -yq \
@@ -29,15 +24,19 @@ RUN yes | unminimize \
         zlib1g-dev \
         libexpat-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+    
+### Specify work directory and install directory ###
+ENV TOP /opt
+ENV RISCV $TOP/riscv32i
+ENV PATH $PATH:$RISCV/bin   
 
-### Get sources and build ###
+### Get sources, build and test RISC-V toolchain ###
 RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
     && cd riscv-gnu-toolchain-rv32i \
     && ./configure --with-arch=rv32i --prefix=$RISCV \
     && make \
-    && cd .. \
-    && rm -rf riscv-gnu-toolchain-rv32i
-
-### Test the RISC-V gnu toolchain ###
-RUN echo 'int main(void) { return 0; }' > hello.c \
+    && echo 'int main(void) { return 0; }' > hello.c \
     && riscv32-unknown-elf-gcc -o hello hello.c
+    && cd .. \
+    && rm -rf riscv-gnu-toolchain-rv32i \
+    
