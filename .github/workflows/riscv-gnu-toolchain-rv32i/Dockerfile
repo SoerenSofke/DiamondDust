@@ -2,10 +2,15 @@ FROM ubuntu:18.04 AS builder
 
 USER root
 
+### Specify work directory and install directory ###
+ENV TOP=/opt \
+    RISCV=$TOP/riscv32i \
+    PATH=$PATH:$RISCV/bin
+
 ### Several standard packages are needed to build the RISC-V toolchain ###
 RUN yes | unminimize \
     && apt-get update \
-    && apt-get install -yq \
+    && apt-get install --no-install-recommends -yq \
         autoconf \
         automake \
         autotools-dev \
@@ -23,15 +28,9 @@ RUN yes | unminimize \
         bc \
         zlib1g-dev \
         libexpat-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-    
-### Specify work directory and install directory ###
-ENV TOP=/opt \
-    RISCV=$TOP/riscv32i \
-    PATH=$PATH:$RISCV/bin
-
-### Get sources, build and test RISC-V toolchain ###
-RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
+        git \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* \
+    && git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
     && cd riscv-gnu-toolchain-rv32i \
     && ./configure --with-arch=rv32i --prefix=$RISCV \
     && make \
