@@ -31,8 +31,12 @@ RUN yes | unminimize \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 ### Get sources and build ###
-RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i
-RUN cd riscv-gnu-toolchain-rv32i && ./configure --with-arch=rv32i --prefix=$RISCV && make
+RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
+    && cd riscv-gnu-toolchain-rv32i \
+    && ./configure --with-arch=rv32i --prefix=$RISCV \
+    && make \
+    && cd .. \
+    && rm -rf riscv-gnu-toolchain-rv32i
 
 ### Test the RISC-V gnu toolchain ###
 RUN echo 'int main(void) { return 0; }' > hello.c \
