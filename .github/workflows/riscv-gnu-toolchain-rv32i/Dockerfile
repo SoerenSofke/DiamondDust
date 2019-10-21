@@ -28,7 +28,7 @@ RUN yes | unminimize \
 ### Specify work directory and install directory ###
 ENV TOP=/opt \
     RISCV=$TOP/riscv32i \
-    PATH $PATH:$RISCV/bin
+    PATH=$PATH:$RISCV/bin
 
 ### Get sources, build and test RISC-V toolchain ###
 RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
