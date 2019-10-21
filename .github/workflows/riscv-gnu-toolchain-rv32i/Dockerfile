@@ -33,7 +33,7 @@ RUN yes | unminimize \
     && git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
     && cd riscv-gnu-toolchain-rv32i \
     && ./configure --with-arch=rv32i --prefix=$RISCV \
-    && make \
+    && make -j 4 \
     && echo 'int main(void) { return 0; }' > hello.c \
     && riscv32-unknown-elf-gcc -o hello hello.c \
     && cd .. \
