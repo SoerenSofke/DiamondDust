@@ -26,9 +26,9 @@ RUN yes | unminimize \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
     
 ### Specify work directory and install directory ###
-ENV TOP /opt
-ENV RISCV $TOP/riscv32i
-ENV PATH $PATH:$RISCV/bin   
+ENV TOP=/opt \
+    RISCV=$TOP/riscv32i \
+    PATH $PATH:$RISCV/bin
 
 ### Get sources, build and test RISC-V toolchain ###
 RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i \
