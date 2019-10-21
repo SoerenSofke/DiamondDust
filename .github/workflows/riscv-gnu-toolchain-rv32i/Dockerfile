@@ -38,5 +38,5 @@ RUN git clone --recursive --branch v20180629 https://github.com/riscv/riscv-gnu-
     && echo 'int main(void) { return 0; }' > hello.c \
     && riscv32-unknown-elf-gcc -o hello hello.c \
     && cd .. \
-    && rm -rf riscv-gnu-toolchain-rv32i \
+    && rm -rf riscv-gnu-toolchain-rv32i
     
