@@ -36,6 +36,3 @@ RUN yes | unminimize \
     && make -j 4 \
     && cd .. \
     && rm -rf riscv-gnu-toolchain-rv32i
-    
-RUN echo 'int main(void) { return 0; }' > hello.c \
-   && riscv32-unknown-elf-gcc -o hello hello.c
