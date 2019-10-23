@@ -1,8 +1,7 @@
 FROM ubuntu:18.04 AS builder
 
-### Specify work directory and install directory ###
-ENV RISCV=/opt/riscv32i \
-    PATH=$PATH:/opt/riscv32i/bin
+### Specify install directory ###
+ENV RISCV=/opt/riscv32i
 
 ### Several standard packages are needed to build the RISC-V toolchain ###
 RUN yes | unminimize \
@@ -11,7 +10,8 @@ RUN yes | unminimize \
         autoconf \
         automake \
         autotools-dev \
-        curl libmpc-dev \
+        curl \
+        libmpc-dev \
         libmpfr-dev \
         libgmp-dev \
         gawk \
@@ -31,7 +31,19 @@ RUN yes | unminimize \
     && cd riscv-gnu-toolchain-rv32i \
     && ./configure --with-arch=rv32i --prefix=$RISCV \
     && make -j 4 \
-    && echo 'int main(void) { return 0; }' > hello.c \
-    && riscv32-unknown-elf-gcc -o hello hello.c \
     && cd .. \
     && rm -rf riscv-gnu-toolchain-rv32i
+        
+### File RISC-V toolchain only ###
+FROM ubuntu:18.04 AS final
+
+### Specify install directory ###
+ENV RISCV=/opt/riscv32i \
+    PATH=$PATH:/opt/riscv32i/bin
+    
+### Copy toolchain ###    
+COPY --from=builder $RISCV/ $RISCV/
+    
+### Sanity check by compiling hello world ###
+RUN echo 'int main(void) { return 0; }' > hello.c \
+    && riscv32-unknown-elf-gcc -o hello hello.c \    
