@@ -35,15 +35,7 @@ RUN yes | unminimize \
     && rm -rf riscv-gnu-toolchain-rv32i
         
 ### File RISC-V toolchain only ###
-FROM ubuntu:18.04 AS final
-
-### Specify install directory ###
-ENV RISCV=/opt/riscv32i \
-    PATH=$PATH:/opt/riscv32i/bin
+FROM scratch AS final
     
 ### Copy toolchain ###    
-COPY --from=builder $RISCV/ $RISCV/
-    
-### Sanity check by compiling hello world ###
-RUN echo 'int main(void) { return 0; }' > hello.c \
-    && riscv32-unknown-elf-gcc -o hello hello.c \    
+COPY --from=builder /opt/riscv32i/ /opt/riscv32i/   
