@@ -19,9 +19,9 @@ RUN yes | unminimize \
     # Download and extract icestrom toolchain
     && wget --no-check-certificate https://github.com/FPGAwars/toolchain-icestorm/releases/download/v1.11.1/toolchain-icestorm-linux_x86_64-1.11.1.tar.gz -O - | tar -xz -C /usr/local \
     # Download and extract verilog formater
-    && wget --no-check-certificate https://github.com/ericsonj/verilog-format/raw/master/bin/verilog-format-LINUX.zip -O tmp.zip && unzip tmp.zip -d /opt/verilog-format/ && rm tmp.zip
+    && wget --no-check-certificate https://github.com/ericsonj/verilog-format/raw/master/bin/verilog-format-LINUX.zip -O tmp.zip && unzip tmp.zip -d /opt/verilog-format/ && rm tmp.zip \
     # make Fish the default shell
-    chsh -s /usr/local/bin/fish
+    && chsh -s /usr/local/bin/fish
     
 ### Specify install directory ###
 ENV RISCV=/opt/riscv32i \
