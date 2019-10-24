@@ -11,6 +11,7 @@ RUN yes | unminimize \
         npm \
         less \
         wget \
+        unzip \
         libmpc-dev \
         iverilog \
         verilator \
