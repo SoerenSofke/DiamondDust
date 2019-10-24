@@ -8,7 +8,6 @@ RUN yes | unminimize \
     && apt-get update \
     && apt-get install --no-install-recommends -yq \
         make \
-        npm \
         less \
         wget \
         unzip \
@@ -16,9 +15,6 @@ RUN yes | unminimize \
         iverilog \
         verilator \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* \
-    # Install and configure npm (used for verilog unit testing via tap-xunit)
-    && npm config set strict-ssl false \
-    && npm install -g tap-xunit \
     # Download and extract icestrom toolchain
     && wget --no-check-certificate https://github.com/FPGAwars/toolchain-icestorm/releases/download/v1.11.1/toolchain-icestorm-linux_x86_64-1.11.1.tar.gz -O - | tar -xz -C /usr/local \
     # Download and extract verilog formater
