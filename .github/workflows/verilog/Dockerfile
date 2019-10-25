@@ -19,7 +19,7 @@ RUN yes | unminimize \
 ### Specify install directory ###
 ENV RISCV=/opt/riscv32i \
     PATH=$PATH:/opt/riscv32i/bin \
-    PS1="\[\]\[\]\u\[\] \[\]\w\[\] \$"
+    PS1='\[\]\[\]\u\[\] \[\]\w\[\] \$'
 
 ### Copy RISCV from builder image ###
 COPY --from=soerensofke/diamonddust:riscvGnuToolchainRv32i $RISCV/ $RISCV/
