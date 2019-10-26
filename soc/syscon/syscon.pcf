@@ -1,0 +1,3 @@
+set_io clk 9        #16A
+set_io rst 10       #18A
+set_io enable 11    #20A
