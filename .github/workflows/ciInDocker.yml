@@ -4,11 +4,13 @@ on: [push]
 
 jobs:
   myjob:
-    runs-on: ubuntu-18.04    
+    runs-on: ubuntu-18.04
     container:
       image: soerensofke/diamonddust:verilog
     steps:
     - uses: actions/checkout@v1
-    - run: echo 'int main(void) { return 0; }' > hello.c && riscv32-unknown-elf-gcc -o hello hello.c
-    - run: ls
-      
+    - run: make build
+    - run: make compile
+    - run: make simulate
+    - run: make synthesize
+    - run: make clean    
