@@ -10,4 +10,4 @@ image: soerensofke/diamonddust:verilog
 vscode:
   extensions:
     - mshr-h.veriloghdl@1.0.3:HvHGo74bvWYMl0HRkjezkg==
-    - ericsonj.verilogformat@1.0.1:nqxhYrstK+6iRH88QagXzg==
+    - zhwu95.riscv@0.0.6:2vEzYKRzTmqOiopcFtaU/Q==
