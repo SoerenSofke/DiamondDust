@@ -1,3 +1,3 @@
 PROJECT:= addInteger
 
-include ../make.asm
+include ../makeAsm.mk
