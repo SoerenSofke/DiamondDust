@@ -1,8 +1,15 @@
 ### Here we build the final image to be used on gitpod ###
 FROM ubuntu:18.04 AS final
 
+RUN yes | unminimize \
+    && apt-get update \
+    && apt-get install --no-install-recommends -yq \
+        fish \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+
+
 ### Gitpod user ###
-RUN useradd -l -u 33333 -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+RUN useradd -l -u 33333 -md /home/gitpod -s /bin/fish -p gitpod gitpod \
     # custom Bash prompt
     && { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> /home/gitpod/.bashrc
 
