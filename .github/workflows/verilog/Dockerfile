@@ -15,7 +15,6 @@ RUN useradd -l -u 33333 -md /home/gitpod -s /bin/bash -p gitpod gitpod \
         libmpc-dev \
         iverilog \
         verilator \
-        emacs \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* \
     ### Download and extract icestrom toolchain ###
     && wget --no-check-certificate https://github.com/FPGAwars/toolchain-icestorm/releases/download/v1.11.1/toolchain-icestorm-linux_x86_64-1.11.1.tar.gz -O - | tar -xz -C /usr/local 
