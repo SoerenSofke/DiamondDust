@@ -6,7 +6,7 @@
 
 ### Table of Contents
 * [Build Status](#build-status)
-* [Build Contribute](#contribute)
+* [Contribute](#contribute)
 
 ### Build Status
 <a href="https://actions-badge.atrox.dev/soerensofke/DiamondDust/goto?ref=master"><img alt="Build Status" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fsoerensofke%2FDiamondDust%2Fbadge%3Fref%3Dmaster&style=flat-square" /></a>
