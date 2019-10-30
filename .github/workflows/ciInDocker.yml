@@ -13,4 +13,5 @@ jobs:
     - run: make compile
     - run: make simulate
     - run: make synthesize
+    - run: make resources
     - run: make clean    
