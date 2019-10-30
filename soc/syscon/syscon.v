@@ -39,8 +39,8 @@ module syscon (
         end
     `else // Synthesis only
         SB_HFOSC #(
-            .CLKHF_DIV ("0b00") // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/iCE40OscillatorUsageGuide.ashx?document_id=50670
-        ) OSCInst0 (
+            .CLKHF_DIV ("0b11") // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/iCE40OscillatorUsageGuide.ashx?document_id=50670
+        ) OSC_inst0 (
             .CLKHFEN(1'b1),
             .CLKHFPU(1'b1),
             .CLKHF(clk)
