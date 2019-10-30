@@ -16,7 +16,7 @@ synthesize: makedir
 	arachne-pnr -q -d 5k -P sg48 -o build/$(PROJECT).asc -p $(PROJECT).pcf build/$(PROJECT).blif
 	icepack build/$(PROJECT).asc build/$(PROJECT).bin
 
-resources:
+resources: makedir
 	@echo == SYNTHESIZE ==
 	yosys -q -l build/$(PROJECT).log -p 'synth_ice40 -top $(PROJECT) -blif build/$(PROJECT).blif' $(SOURCE)
 	@rm -rf build/$(PROJECT).resources

@@ -13,7 +13,10 @@ simulate:
 synthesize:
 	$(foreach makefile,$(SOC_MAKEFILES), $(MAKE) -C $(makefile) $@;)
 
+resources:
+	$(foreach makefile,$(SOC_MAKEFILES), $(MAKE) -C $(makefile) $@;)
+
 clean:
 	$(foreach makefile,$(APP_MAKEFILES), $(MAKE) -C $(makefile) $@;)
 	$(foreach makefile,$(SOC_MAKEFILES), $(MAKE) -C $(makefile) $@;)
-	
+
