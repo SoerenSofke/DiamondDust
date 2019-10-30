@@ -1,18 +1,18 @@
 `timescale 1ns/100ps
 
 module syscon (
-    output reg clk   ,
-    output reg rst     = 1,
-    output reg enable  = 0
+    output reg clk,
+    output reg rst = 1
 );
     // Internal states
+    reg enable = 0;
     reg next_enable;
-    reg next_reset ;
+    reg next_reset;
 
     // Combinational process
     always @(*) begin
         if (enable == 0) begin
-            next_reset  = 1;
+            next_reset = 1;
             next_enable = 1;
         end else begin
             next_reset = 0;
@@ -22,7 +22,7 @@ module syscon (
     // Sequential process
     always @(posedge clk) begin
         enable <= next_enable;
-        rst    <= next_reset;
+        rst <= next_reset;
     end
 
     // Clock generation
@@ -37,15 +37,13 @@ module syscon (
         always begin
             #0.5 clk = !clk;
         end
-
     `else // Synthesis only
-        SB_LFOSC #(
-            //.CLKLF_DIV ("0b11") //TODO: decide on clock speed of soc
-        ) OSCInst0 (
-            .CLKLFPU(1'b1),
-            .CLKLFEN(1'b1),
-            .CLKLF  (clk )
+        SB_HFOSC #(
+            .CLKHF_DIV ("0b11") // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/iCE40OscillatorUsageGuide.ashx?document_id=50670
+        ) OSC_inst0 (
+            .CLKHFEN(1'b1),
+            .CLKHFPU(1'b1),
+            .CLKHF(clk)
         );
     `endif
-
 endmodule
