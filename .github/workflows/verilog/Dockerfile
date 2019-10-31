@@ -21,7 +21,11 @@ RUN useradd -l -u 33333 -md /home/gitpod -s /bin/bash -p gitpod gitpod \
 
 ### Specify install directory ###
 ENV RISCV=/opt/riscv32i \
-    PATH=$PATH:/opt/riscv32i/bin
+    ISTYLE=/opt/iStyle \
+    PATH=$PATH:/opt/riscv32i/bin:/opt/iStyle
 
 ### Copy RISCV from builder image ###
 COPY --from=soerensofke/diamonddust:riscvGnuToolchainRv32i $RISCV/ $RISCV/
+
+### Copy iStyle from builder image ###
+COPY --from=soerensofke/diamonddust:iStyle $ISTYLE/ $ISTYLE/
