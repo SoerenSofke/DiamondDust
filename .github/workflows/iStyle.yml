@@ -1,0 +1,21 @@
+name: Docker Image iStyle
+
+on:
+  push:
+    paths:
+    - '**iStyle/Dockerfile'
+    - '**iStyle.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Docker Image iStyle
+      run: |
+        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+        docker build -t soerensofke/diamonddust:iStyle ./.github/workflows/iStyle
+        docker push soerensofke/diamonddust:iStyle
+      env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
