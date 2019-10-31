@@ -27,6 +27,7 @@ RUN yes | unminimize \
     && git clone https://github.com/thomasrussellmurphy/istyle-verilog-formatter.git iStyle \
     && cd iStyle \
     && make \
+    && mkdir -p /opt/iStyle \
     && cp ./bin/release/iStyle /opt/iStyle/
 
 ### File iStyle only ###
