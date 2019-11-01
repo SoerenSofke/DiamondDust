@@ -1,0 +1,21 @@
+name: Docker Image builder
+
+on:
+  push:
+    paths:
+    - '**builder/Dockerfile'
+    - '**builder.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Docker Image builder
+      run: |
+        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+        docker build -t soerensofke/diamonddust:builder ./.github/workflows/builder
+        docker push soerensofke/diamonddust:builder
+      env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
