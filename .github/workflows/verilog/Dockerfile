@@ -7,7 +7,6 @@ RUN useradd -l -u 33333 -md /home/gitpod -s /bin/bash -p gitpod gitpod \
     && { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> /home/gitpod/.bashrc \
     ### Install HDL-tools ###
     && yes | unminimize \
-    && apt-get update \
     && apt-get install --no-install-recommends -yq \
         make \
         wget \

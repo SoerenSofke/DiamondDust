@@ -15,3 +15,20 @@
 Please file any issues and feature requests [here](https://github.com/soerensofke/DiamondDust/issues) or directly start coding using the legendary Gitpod.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/soerensofke/DiamondDust)
+
+### User Preferences
+```json
+{
+    "extensions.showBuiltin": false,
+    "editor.autoSave": "on",
+    "editor.formatOnSave": true,
+    "systemverilog.compileOnSave": true,
+    "systemverilog.launchConfiguration": "verilator --lint-only +1364-2005ext+v -Wall --relative-includes -I/workspace/DiamondDust/utilities/verilatorLintShare",
+    "systemverilog.forceFastIndexing": true,
+    "verilog-formatter.istyle.path": "iStyle",
+    "verilog-formatter.istyle.style": "K&R",
+    "verilog-formatter.istyle.args": "--pad=all",
+    "plantuml.server": "https://www.plantuml.com/plantuml",
+    "plantuml.render": "PlantUMLServer",
+}
+```
