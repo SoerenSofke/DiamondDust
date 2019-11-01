@@ -1,4 +1,5 @@
 @startuml Dockerfile dependencies
+skinparam componentStyle uml2
 skinparam handwritten true
 skinparam monochrome true
 skinparam defaultFontName DejaVu
