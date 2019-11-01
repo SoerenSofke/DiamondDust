@@ -7,7 +7,7 @@ RUN git clone https://github.com/poucotm/verilator.git verilator \
     && unset VERILATOR_ROOT \
     && ./configure --prefix=/opt/verilator \
     && make -j 4 \
-    && mkdir install
+    && make install
     
 ### File verilator only ###
 FROM scratch AS final
