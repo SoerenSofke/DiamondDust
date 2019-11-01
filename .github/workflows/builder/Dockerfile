@@ -23,7 +23,6 @@ RUN yes | unminimize \
         zlib1g-dev \
         libexpat-dev \
         git \
-        bisonz \
         libfl2 \
         libfl-dev \
         zlibc \
