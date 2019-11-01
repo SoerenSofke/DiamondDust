@@ -2,7 +2,6 @@ FROM ubuntu:18.04 AS builder
 
 ### Several standard packages are needed to build iStyle ###
 RUN yes | unminimize \
-    && apt-get update \
     && apt-get install --no-install-recommends -yq \
         autoconf \
         automake \
