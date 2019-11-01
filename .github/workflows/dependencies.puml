@@ -1,0 +1,20 @@
+@startuml Dockerfile dependencies
+
+frame "Dockerfile Dependencies" {
+    file "ubuntu:18.04" as ubuntu
+    file builder
+    file iStyle
+    file "risc-gnu-toolchain-rv32i" as riscGnuToolchainRv32i
+    file verilog
+    file scratch
+
+    builder ..> ubuntu
+    iStyle ..> builder
+    iStyle ..> scratch
+    riscGnuToolchainRv32i ..> builder
+    riscGnuToolchainRv32i ..> scratch
+    verilog ..> ubuntu
+    verilog *-- riscGnuToolchainRv32i
+    verilog *-- iStyle
+}
+@enduml
