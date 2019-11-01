@@ -1,20 +1,30 @@
 @startuml Dockerfile dependencies
+skinparam handwritten true
+skinparam monochrome true
+skinparam defaultFontName DejaVu
 
-frame "Dockerfile Dependencies" {
+frame "Dependencies" {
+
+    artifact "iStyle  " as iStyle {
+        component "iStyle" as iStyleBinary
+    }
+
+    artifact "riscv-gnu-toolchain-rv32i   " as riscvGnuToolchainRv32i {
+        component "riscv32-unknown-elf-*" as riscv32Binary
+    }
+
     file "ubuntu:18.04" as ubuntu
     file builder
-    file iStyle
-    file "risc-gnu-toolchain-rv32i" as riscGnuToolchainRv32i
     file verilog
     file scratch
 
     builder ..> ubuntu
     iStyle ..> builder
     iStyle ..> scratch
-    riscGnuToolchainRv32i ..> builder
-    riscGnuToolchainRv32i ..> scratch
+    riscvGnuToolchainRv32i ..> builder
+    riscvGnuToolchainRv32i ..> scratch
     verilog ..> ubuntu
-    verilog *-- riscGnuToolchainRv32i
-    verilog *-- iStyle
+    verilog *-- riscv32Binary
+    verilog *-- iStyleBinary
 }
 @enduml
