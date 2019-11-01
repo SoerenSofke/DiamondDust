@@ -23,4 +23,9 @@ RUN yes | unminimize \
         zlib1g-dev \
         libexpat-dev \
         git \
+        bisonz \
+        libfl2 \
+        libfl-dev \
+        zlibc \
+        zlib1g \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
