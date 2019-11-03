@@ -1,5 +1,4 @@
 `include "syscon.v"
-`timescale 1ns/1ns
 
 module syscon_top (
            output reg clk_pin = 0,
