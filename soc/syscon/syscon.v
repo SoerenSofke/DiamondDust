@@ -1,7 +1,9 @@
-`timescale 1ns/100ps
+`ifdef SIMULATION // Simulation only
+`include "SB_HFOSC.v"
+`endif
 
 module syscon (
-           output reg clk,
+           output wire clk,
            output reg rst = 1
        );
 // Internal states
@@ -26,26 +28,16 @@ always @( posedge clk ) begin
     rst <= next_reset;
 end
 
-// Clock generation
-`ifdef SIMULATION // Simulation only
-initial begin
-    clk = 0;
-    $dumpfile( "build/top.vcd" );
-    $dumpvars;
-    #`SIMULATION $finish;
-end
-
-always begin
-    #0.5 clk = !clk;
-end
-`else // Synthesis only
+// Sub-module for clock generation
 SB_HFOSC #(
-             // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/iCE40OscillatorUsageGuide.ashx
+             // According to https://www.latticesemi.com/-/media/LatticeSemi/Documents/UserManuals/RZ/migration_guide_icecube2.ashx
+             // HSOSC provides a 48MHz, 24MHz, 12MHz or 6MHz oscillation frequency output while LSOSC generates a 10KHz frequency out.
+             // 0b00=48MHz(default), 0b01=24MHz, 0b10=12MHz, 0b11=6MHz
              .CLKHF_DIV ( "0b11" )
          ) OSC_inst0 (
              .CLKHFEN( 1'b1 ),
              .CLKHFPU( 1'b1 ),
              .CLKHF( clk )
          );
-`endif
+
 endmodule
