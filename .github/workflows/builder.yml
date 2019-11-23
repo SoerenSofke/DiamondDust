@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Docker Image builder
       run: |
-        echo $PACKAGE_TOCKEN | docker login --username soerensofke --password-stdin
+        echo $PACKAGE_TOKEN | docker login docker.pkg.github.com --username soerensofke --password-stdin
         docker build -t docker.pkg.github.com/soerensofke/diamonddust/builder:latest ./.github/workflows/builder
         docker push docker.pkg.github.com/soerensofke/diamonddust/builder:latest
       env:
-          PACKAGE_TOCKEN: ${{ secrets.PACKAGE_TOCKEN }}
+          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
