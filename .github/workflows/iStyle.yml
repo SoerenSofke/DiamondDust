@@ -14,7 +14,7 @@ jobs:
     - name: Docker Image iStyle
       run: |
         echo $PACKAGE_TOKEN | docker login docker.pkg.github.com --username soerensofke --password-stdin
-        docker build -t docker.pkg.github.com/soerensofke/diamonddust/iStyle:latest ./.github/workflows/iStyle
-        docker push docker.pkg.github.com/soerensofke/diamonddust/iStyle:latest
+        docker build -t docker.pkg.github.com/soerensofke/diamonddust/istyle:latest ./.github/workflows/iStyle
+        docker push docker.pkg.github.com/soerensofke/diamonddust/istyle:latest
       env:
           PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
