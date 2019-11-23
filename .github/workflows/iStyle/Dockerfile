@@ -1,4 +1,4 @@
-FROM soerensofke/diamonddust:builder AS builder
+FROM docker.pkg.github.com/soerensofke/diamonddust/builder:latest AS builder
 
 ### Several standard packages are needed to build iStyle ###
 RUN git clone https://github.com/thomasrussellmurphy/istyle-verilog-formatter.git iStyle \
