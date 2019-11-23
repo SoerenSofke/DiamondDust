@@ -1,4 +1,4 @@
-FROM soerensofke/diamonddust:builder AS builder
+FROM docker.pkg.github.com/soerensofke/diamonddust/builder:latest AS builder
 
 ### Specify install directory ###
 ENV RISCV=/opt/riscv32i
