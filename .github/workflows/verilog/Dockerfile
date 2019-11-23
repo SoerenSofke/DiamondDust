@@ -24,7 +24,7 @@ ENV RISCV=/opt/riscv32i \
     PATH=$PATH:/opt/riscv32i/bin:/opt/iStyle
 
 ### Copy RISCV from builder image ###
-COPY --from=soerensofke/diamonddust:riscvGnuToolchainRv32i $RISCV/ $RISCV/
+COPY --from=docker.pkg.github.com/soerensofke/diamonddust/riscv-gnu-toolchain-rv32i:latest i $RISCV/ $RISCV/
 
 ### Copy iStyle from builder image ###
-COPY --from=soerensofke/diamonddust:iStyle $ISTYLE/ $ISTYLE/
+COPY --from=docker.pkg.github.com/soerensofke/diamonddust/istyle:latest $ISTYLE/ $ISTYLE/
