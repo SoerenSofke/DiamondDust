@@ -6,7 +6,7 @@ jobs:
   myjob:
     runs-on: ubuntu-18.04
     container:
-      image: push docker.pkg.github.com/soerensofke/diamonddust/verilog:latest
+      image: docker.pkg.github.com/soerensofke/diamonddust/verilog:latest
     steps:
     - uses: actions/checkout@v1
     - run: make build
