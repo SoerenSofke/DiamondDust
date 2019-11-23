@@ -16,9 +16,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Docker Image riscv-gnu-toolchain-rv32i
       run: |
-        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin        
-        docker build -t soerensofke/diamonddust:riscvGnuToolchainRv32i ./.github/workflows/riscv-gnu-toolchain-rv32i
-        docker push soerensofke/diamonddust:riscvGnuToolchainRv32i        
+        echo $PACKAGE_TOKEN | docker login docker.pkg.github.com --username soerensofke --password-stdin    
+        docker build -t docker.pkg.github.com/soerensofke/diamonddust/riscv-gnu-toolchain-rv32i:latest ./.github/workflows/riscv-gnu-toolchain-rv32i
+        docker push docker.pkg.github.com/soerensofke/diamonddust/riscv-gnu-toolchain-rv32i:latest      
       env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
