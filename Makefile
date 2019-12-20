@@ -19,4 +19,4 @@ resources:
 clean:
 	$(foreach makefile,$(APP_MAKEFILES), $(MAKE) -C $(makefile) $@;)
 	$(foreach makefile,$(SOC_MAKEFILES), $(MAKE) -C $(makefile) $@;)
-
+	
