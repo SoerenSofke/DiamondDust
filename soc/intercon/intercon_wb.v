@@ -5,9 +5,6 @@ module intercon_wb #(
            parameter WB_NUM_SLAVES_BITS = 3,
            parameter SLAVE_ADDRESS_BITS = 20
        ) (
-           // Syscon interface
-           input wire clk_i,
-
            // Wischbone master interface
            input wire [ WB_DATA_WIDTH - 1: 0 ] master_dat_i,
            input wire master_we_i ,
@@ -15,23 +12,23 @@ module intercon_wb #(
            input wire [ WB_ADDR_WIDTH - 1: 0 ] master_adr_i,
            input wire master_cyc_i,
            input wire master_stb_i,
-           output wire [ WB_DATA_WIDTH - 1: 0 ] master_dat_o,
-           output wire master_ack_o,
+           output reg [ WB_DATA_WIDTH - 1: 0 ] master_dat_o,
+           output reg master_ack_o,
 
            // Wishbone slave interface
-           output wire [ WB_DATA_WIDTH - 1: 0 ] slave_dat_o,
-           output wire [ WB_NUM_SLAVES - 1: 0 ] slave_we_o ,
-           output wire [ 3: 0 ] slave_sel_o,
-           output wire [ WB_ADDR_WIDTH - 1: 0 ] slave_adr_o,
-           output wire [ WB_NUM_SLAVES - 1: 0 ] slave_cyc_o,
-           output wire [ WB_NUM_SLAVES - 1: 0 ] slave_stb_o,
+           output reg [ WB_DATA_WIDTH - 1: 0 ] slave_dat_o,
+           output reg [ WB_NUM_SLAVES - 1: 0 ] slave_we_o ,
+           output reg [ 3: 0 ] slave_sel_o,
+           output reg [ WB_ADDR_WIDTH - 1: 0 ] slave_adr_o,
+           output reg [ WB_NUM_SLAVES - 1: 0 ] slave_cyc_o,
+           output reg [ WB_NUM_SLAVES - 1: 0 ] slave_stb_o,
            input wire [ WB_DATA_WIDTH * WB_NUM_SLAVES - 1: 0 ] slave_dat_i,
            input wire [ WB_NUM_SLAVES - 1: 0 ] slave_ack_i
        );
 
 // Master / Slave Connection
-wire [ WB_NUM_SLAVES - 1: 0 ] mask;
-wire [ WB_NUM_SLAVES_BITS - 1 : 0 ] index;
+reg [ WB_NUM_SLAVES - 1: 0 ] mask;
+reg [ WB_NUM_SLAVES_BITS - 1 : 0 ] index;
 
 always @( * ) begin
     // Address decoder
@@ -41,7 +38,7 @@ always @( * ) begin
     // Set outputs to slave (from maser)
     slave_cyc_o = mask & { WB_NUM_SLAVES{ master_cyc_i } };
     slave_stb_o = mask & { WB_NUM_SLAVES{ master_stb_i } };
-    slave_we_o = mask & { WB_NUM_SLAVES{ we_intern } };
+    slave_we_o = mask & { WB_NUM_SLAVES{ master_we_i } };
 
     slave_dat_o = master_dat_i;
     slave_sel_o = master_sel_i;
@@ -51,18 +48,4 @@ always @( * ) begin
     master_dat_o = slave_dat_i[ WB_DATA_WIDTH * index +: WB_DATA_WIDTH ];
     master_ack_o = slave_ack_i[ index ];
 end
-
-// Workaround: we only one clock cycle
-reg we_intern;
-always @( posedge clk_i ) begin : we_enable
-    reg we_prev = 1'b0;
-    if ( master_we_i == 1'b1 && we_prev == 1'b0 ) begin
-        we_intern <= 1'b1;
-    end
-    else begin
-        we_intern <= 1'b0;
-    end
-    we_prev <= master_we_i;
-end
-
 endmodule
