@@ -57,25 +57,25 @@ integer cycleCounter;
 
 always @( posedge clk ) begin
     if ( rst == 1 ) begin
-        cycleCounter = 0;
+        cycleCounter <= 0;
 
-        master_dat_i = 32'hFFFFFFFF;
-        master_sel_i = 4'hF;
+        master_dat_i <= 32'hFFFFFFFF;
+        master_sel_i <= 4'hF;
 
-        master_we_i = 1;
-        master_adr_i = 0;
-        master_cyc_i = 1;
-        master_stb_i = 1;
+        master_we_i <= 1;
+        master_adr_i <= 0;
+        master_cyc_i <= 1;
+        master_stb_i <= 1;
 
-        slave_dat_i = 0;
-        slave_ack_i = 0;
+        slave_dat_i <= 0;
+        slave_ack_i <= 0;
     end
     else begin
         // Address slave #1
         if ( cycleCounter == 0 ) begin
-            master_adr_i = 32'h00000000;
-            slave_ack_i = 8'b00000001;
-            slave_dat_i = 256'h00000000_00000000_00000000_00000000_00000000_00000000_00000000_FFFFFFFF;
+            master_adr_i <= 32'h00000000;
+            slave_ack_i <= 8'b00000001;
+            slave_dat_i <= 256'h00000000_00000000_00000000_00000000_00000000_00000000_00000000_FFFFFFFF;
         end
         if ( cycleCounter == 1 ) begin
             tap.assert( slave_cyc_o == 8'b00000001, "slave index 1: slave_cyc_o" );
@@ -88,14 +88,13 @@ always @( posedge clk ) begin
 
             tap.assert( master_ack_o == 1, "slave index 1: master_ack_o" );
             tap.assert( master_dat_o == 32'hFFFFFFFF, "slave index 1: master_dat_o" );
-
         end
 
         // Address slave #2
         if ( cycleCounter == 2 ) begin
-            master_adr_i = 32'h00100000;
-            slave_ack_i = 8'b00000010;
-            slave_dat_i = 256'h00000000_00000000_00000000_00000000_00000000_00000000_FFFFFFFF_00000000;
+            master_adr_i <= 32'h00100000;
+            slave_ack_i <= 8'b00000010;
+            slave_dat_i <= 256'h00000000_00000000_00000000_00000000_00000000_00000000_FFFFFFFF_00000000;
         end
         if ( cycleCounter == 3 ) begin
             tap.assert( slave_cyc_o == 8'b00000010, "slave index 2: slave_cyc_o" );
@@ -112,9 +111,9 @@ always @( posedge clk ) begin
 
         // Address slave #3
         if ( cycleCounter == 4 ) begin
-            master_adr_i = 32'h00200000;
-            slave_ack_i = 8'b00000100;
-            slave_dat_i = 256'h00000000_00000000_00000000_00000000_00000000_FFFFFFFF_00000000_00000000;
+            master_adr_i <= 32'h00200000;
+            slave_ack_i <= 8'b00000100;
+            slave_dat_i <= 256'h00000000_00000000_00000000_00000000_00000000_FFFFFFFF_00000000_00000000;
         end
         if ( cycleCounter == 5 ) begin
             tap.assert( slave_cyc_o == 8'b00000100, "slave index 3: slave_cyc_o" );
@@ -131,9 +130,9 @@ always @( posedge clk ) begin
 
         // Address slave #4
         if ( cycleCounter == 6 ) begin
-            master_adr_i = 32'h00300000;
-            slave_ack_i = 8'b00001000;
-            slave_dat_i = 256'h00000000_00000000_00000000_00000000_FFFFFFFF_00000000_00000000_00000000;
+            master_adr_i <= 32'h00300000;
+            slave_ack_i <= 8'b00001000;
+            slave_dat_i <= 256'h00000000_00000000_00000000_00000000_FFFFFFFF_00000000_00000000_00000000;
         end
         if ( cycleCounter == 7 ) begin
             tap.assert( slave_cyc_o == 8'b00001000, "slave index 4: slave_cyc_o" );
@@ -150,9 +149,9 @@ always @( posedge clk ) begin
 
         // Address slave #5
         if ( cycleCounter == 8 ) begin
-            master_adr_i = 32'h00400000;
-            slave_ack_i = 8'b00010000;
-            slave_dat_i = 256'h00000000_00000000_00000000_FFFFFFFF_00000000_00000000_00000000_00000000;
+            master_adr_i <= 32'h00400000;
+            slave_ack_i <= 8'b00010000;
+            slave_dat_i <= 256'h00000000_00000000_00000000_FFFFFFFF_00000000_00000000_00000000_00000000;
         end
         if ( cycleCounter == 9 ) begin
             tap.assert( slave_cyc_o == 8'b00010000, "slave index 5: slave_cyc_o" );
@@ -169,9 +168,9 @@ always @( posedge clk ) begin
 
         // Address slave #6
         if ( cycleCounter == 10 ) begin
-            master_adr_i = 32'h00500000;
-            slave_ack_i = 8'b00100000;
-            slave_dat_i = 256'h00000000_00000000_FFFFFFFF_00000000_00000000_00000000_00000000_00000000;
+            master_adr_i <= 32'h00500000;
+            slave_ack_i <= 8'b00100000;
+            slave_dat_i <= 256'h00000000_00000000_FFFFFFFF_00000000_00000000_00000000_00000000_00000000;
         end
         if ( cycleCounter == 11 ) begin
             tap.assert( slave_cyc_o == 8'b00100000, "slave index 6: slave_cyc_o" );
@@ -188,9 +187,9 @@ always @( posedge clk ) begin
 
         // Address slave #7
         if ( cycleCounter == 12 ) begin
-            master_adr_i = 32'h00600000;
-            slave_ack_i = 8'b01000000;
-            slave_dat_i = 256'h00000000_FFFFFFFF_00000000_00000000_00000000_00000000_00000000_00000000;
+            master_adr_i <= 32'h00600000;
+            slave_ack_i <= 8'b01000000;
+            slave_dat_i <= 256'h00000000_FFFFFFFF_00000000_00000000_00000000_00000000_00000000_00000000;
         end
         if ( cycleCounter == 13 ) begin
             tap.assert( slave_cyc_o == 8'b01000000, "slave index 7: slave_cyc_o" );
@@ -207,9 +206,9 @@ always @( posedge clk ) begin
 
         // Address slave #8
         if ( cycleCounter == 14 ) begin
-            master_adr_i = 32'h00700000;
-            slave_ack_i = 8'b10000000;
-            slave_dat_i = 256'hFFFFFFFF_00000000_00000000_00000000_00000000_00000000_00000000_00000000;
+            master_adr_i <= 32'h00700000;
+            slave_ack_i <= 8'b10000000;
+            slave_dat_i <= 256'hFFFFFFFF_00000000_00000000_00000000_00000000_00000000_00000000_00000000;
         end
         if ( cycleCounter == 15 ) begin
             tap.assert( slave_cyc_o == 8'b10000000, "slave index 8: slave_cyc_o" );
@@ -229,7 +228,7 @@ always @( posedge clk ) begin
             tap.finish;
         end
 
-        cycleCounter = cycleCounter + 1;
+        cycleCounter <= cycleCounter + 1;
     end
 end
 
