@@ -13,27 +13,35 @@ module rom_wb #(
            /* verilator lint_on UNUSED */
        );
 
-// Internal States
+// Internal states
 reg [ 31: 0 ] rom [ 0: 3071 ];
 reg [ 11: 0 ] address;
+reg [ 31: 0 ] _wbs_dat_o;
+reg _wbs_ack_o;
 
 // Initialization
 initial begin
     $readmemh( ROM_IMAGE, rom );
 end
 
-// Cloed process with algoritm
-always @( posedge clk ) begin
+// Combinational process
+always @( * ) begin
     if ( wbs_cyc_i == 1 && wbs_stb_i == 1 && ~wbs_ack_o ) begin
         address = wbs_adr_i[ 13: 2 ];
-        wbs_dat_o = rom[ address ];
-        wbs_ack_o = 1;
+        _wbs_dat_o = rom[ address ];
+        _wbs_ack_o = 1;
     end
     else begin
         address = 12'hXXX;
-        wbs_dat_o = 32'hXXXXXXXX;
-        wbs_ack_o = 0;
+        _wbs_dat_o = 32'hXXXXXXXX;
+        _wbs_ack_o = 0;
     end
+end
+
+// Sequential process
+always @( posedge clk ) begin
+    wbs_dat_o <= _wbs_dat_o;
+    wbs_ack_o <= _wbs_ack_o;
 end
 
 endmodule
