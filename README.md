@@ -19,16 +19,17 @@ Please file any issues and feature requests [here](https://github.com/soerensofk
 ### User Preferences
 ```json
 {
+{
     "extensions.showBuiltin": false,
     "editor.autoSave": "on",
-    "editor.formatOnSave": true,
+    "plantuml.server": "https://www.plantuml.com/plantuml",
+    "plantuml.render": "PlantUMLServer",
     "systemverilog.compileOnSave": true,
-    "systemverilog.launchConfiguration": "verilator --lint-only +1364-2005ext+v -Wall --relative-includes -I/workspace/DiamondDust/utilities/verilatorLintShare",
+    "systemverilog.launchConfiguration": "verilator --lint-only +1364-2005ext+v -Wall --Wno-BLKSEQ --relative-includes -I/workspace/DiamondDust/utilities/verilatorLintShare",
     "systemverilog.forceFastIndexing": true,
     "verilog-formatter.istyle.path": "iStyle",
     "verilog-formatter.istyle.style": "K&R",
     "verilog-formatter.istyle.args": "--pad=all",
-    "plantuml.server": "https://www.plantuml.com/plantuml",
-    "plantuml.render": "PlantUMLServer",
+    "editor.formatOnSave": true,
 }
 ```
