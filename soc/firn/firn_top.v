@@ -30,6 +30,8 @@ rom_wb #(
            .wbs_cyc_i( inst_cyc )
        );
 
+       
+
 // VexRiscV
 assign inst_adr_mosi[ 1: 0 ] = 0;
 VexRiscv vex(
