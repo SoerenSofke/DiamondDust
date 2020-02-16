@@ -6,10 +6,10 @@ module firn_top( );
 
 // Syscon
 wire clk;
-wire rst;
+wire reset;
 syscon syscon (
            .clk( clk ),
-           .rst( rst )
+           .rst( reset )
        );
 
 // ROM
@@ -25,12 +25,13 @@ rom_wb #(
            .clk( clk ),
            .wbs_ack_o( inst_ack ),
            .wbs_dat_o( inst_data_miso ),
-           .wbs_stb_i( slave_stb_o ),
+           .wbs_stb_i( inst_str ),
            .wbs_adr_i( inst_adr_mosi ),
            .wbs_cyc_i( inst_cyc )
        );
 
 // VexRiscV
+assign inst_adr_mosi[ 1: 0 ] = 0;
 VexRiscv vex(
              .clk( clk ),
              .reset ( reset ),
