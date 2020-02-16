@@ -1,5 +1,4 @@
 `include "../syscon/syscon.v"
-`include "../intercon/intercon_wb.v"
 `include "../vexRiscv/VexRiscv.v"
 `include "../rom/rom_wb.v"
 
