@@ -9,8 +9,9 @@ jobs:
     container:
       image: soerensofke/diamonddust:verilog
     steps:
-      - name: Checkout, build FPGA binary with software integarted
+      - name: Checkout
         uses: actions/checkout@v1
+      - name: Build FPGA binary with software integarted
         run: echo "Hello World"
       - name: Upload FPGA binary
         uses: actions/upload-artifact@v1
