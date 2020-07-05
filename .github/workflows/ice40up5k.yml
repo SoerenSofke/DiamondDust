@@ -20,12 +20,14 @@ jobs:
           path: applications/uart/vexUart.bin
 
   job_target_test:
-    name: Test artifacts on target
+    name: TestFPGA binary on target
     needs: job_build
     runs-on: self-hosted
     steps:
       - name: Checkout test environment
         uses: actions/checkout@v1
+      - name: Delete existing FPGA binary
+        run: run applications/uart/vexUart.bin
       - name: Download FPGA binary from job_build
         uses: actions/download-artifact@v1
         with:
