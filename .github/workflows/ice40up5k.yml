@@ -3,8 +3,32 @@ name: CI on ice40up5k
 on: [push]
 
 jobs:
-  myjob:
+  job_build:
+    name: Build FPGA binary
+    runs-on: ubuntu-18.04
+    container:
+      image: soerensofke/diamonddust:verilog
+    steps:
+      - name: Checkout, build FPGA binary with software integarted
+        uses: actions/checkout@v1
+        run: echo "Hello World"
+      - name: Upload FPGA binary
+        uses: actions/upload-artifact@v1
+        with:
+          name: fpgaBinary
+          path: applications/uart/vexUart.bin
+
+  job_target_test:
+    name: Test artifacts on target
+    needs: job_build
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v1
-    - run: lua ./applications/uart/testUart.lua
+      - name: Checkout test environment
+        uses: actions/checkout@v1
+      - name: Download FPGA binary from job_build
+        uses: actions/download-artifact@v1
+        with:
+          name: fpgaBinary
+          path: applications/uart/vexUart.bin
+      - name: Test FPGA binarty on target
+        run: lua ./applications/uart/testUart.lua
